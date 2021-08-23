@@ -81,12 +81,43 @@ class Calculator extends Component {
   }
   
   operatorPressed(str){
-    this.setState({operator: str
-    , screenText: this.state.screenText + ' ' + str + ' ',
-    operatorClicked: true
+    this.setState({operator: str,
+      firstNum: this.state.screenText,
+      screenText: this.state.screenText + ' ' + str + ' ',
+      operatorClicked: true
 
     });
     
+  }
+  multiply(num1, num2){
+    var result = num1 * num2;
+  }
+
+  divide(num1, num2){
+    var result = num1/num2;
+  }
+  subtract(num1, num2){
+    var result = num1 - num2; 
+  }
+  add(num1, num2){
+    result = num1 + num2;
+  }
+  parseStringForSecondNum(str){
+    var letter;
+    var i = 0;
+
+    
+  }
+  equalsPressed(){
+    if(this.state.operator === 'x'){
+      this.state.secondNum = 
+    }else if(this.state.operator === '÷'){
+
+    }else if (this.state.operator === '-'){
+
+    }else if(this.state.operator ===  '+'){
+
+    }
   }
 
   clearPressed(){
