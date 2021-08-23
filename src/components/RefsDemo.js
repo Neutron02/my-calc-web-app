@@ -57,44 +57,82 @@ height:140px;
 `;
 
 class Calculator extends Component {
-    click(){
-        console.log('clikc');
-    }
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.state = {screenText: "",
+    id: "",
+    numInputs: 0,
+    firstNum: 0,
+    secondNum: 0,
+    operator: "",
+    operatorClicked: false
 
+  }
+  }    
+  handleClick(str) {
+    console.log("str is: " + str);
+    var txt = document.getElementById(str).innerHTML;
     
+    console.log("txt is: " + txt);
+    this.setState({
+      screenText: this.state.screenText + txt
+    });
+  }
+  
+  operatorPressed(str){
+    this.setState({operator: str
+    , screenText: this.state.screenText + ' ' + str + ' ',
+    operatorClicked: true
+
+    });
+    
+  }
+
+  clearPressed(){
+    this.setState({
+      screenText: ""
+    });
+  }
+
     render(){
         return(
-            <CalculatorContainer className="calculator-container">
-            <ScreenContainer className="screen">
-            </ScreenContainer>
+          <CalculatorContainer className="calculator-container">
+              <ScreenContainer className="screen">
+                {this.state.screenText}
+              </ScreenContainer>
             <ButtonsContainer className="buttons-container">
               <OperationsDiv>
-                <TopRowButtons id="x" type="button">x</TopRowButtons>
-                <TopRowButtons id="÷" type="button">÷</TopRowButtons>
-                <TopRowButtons id="-" type="button">-</TopRowButtons>
-                <TopRowButtons id="+" type="button">+</TopRowButtons>
+                <TopRowButtons onClick={() => this.operatorPressed('x')} id="x" type="button">x</TopRowButtons>
+                <TopRowButtons onClick={() => this.operatorPressed('÷')} id="÷" type="button">÷</TopRowButtons>
+                <TopRowButtons onClick={() => this.operatorPressed('-')} id="-" type="button">-</TopRowButtons>
+                <TopRowButtons onClick={() => this.operatorPressed('+')} id="+" type="button">+</TopRowButtons>
               </OperationsDiv>
               <Three>
-                <ThreeBThreeButtons onclick="click"id="7" type="button" >7</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="8" type="button" >8</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="9" type="button" >9</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="4" type="button" >4</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="5" type="button" >5</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="6" type="button" >6</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="1" type="button" >1</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="2" type="button" >2</ThreeBThreeButtons>
-                <ThreeBThreeButtons id="3" type="button" >3</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('7')} id="7" type="button" >7</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('8')} id="8" type="button" >8</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('9')} id="9" type="button" >9</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('4')} id="4" type="button" >4</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('5')} id="5" type="button" >5</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('6')} id="6" type="button" >6</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('1')} id="1" type="button" >1</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('2')} id="2" type="button" >2</ThreeBThreeButtons>
+                <ThreeBThreeButtons onClick={() => this.handleClick('3')} id="3" type="button" >3</ThreeBThreeButtons>
                 
               </Three>
               <BottomOperationsDiv>
-                <BottomRowButtons id="0" type="button">0</BottomRowButtons>
-                <BottomRowButtons id="." type="button">.</BottomRowButtons>
-                <BottomRowButtons id="clear" type="button">clear</BottomRowButtons>
-                <BottomRowButtons id="=" type="button">=</BottomRowButtons>  
+                <BottomRowButtons onClick={() => this.handleClick()} id="0" type="button">0</BottomRowButtons>
+                <BottomRowButtons onClick={() => this.handleClick()} id="." type="button">.</BottomRowButtons>
+                <BottomRowButtons onClick={() => this.clearPressed()} id="clear" type="button">clear</BottomRowButtons>
+                <BottomRowButtons onClick={() => this.handleClick()} id="=" type="button">=</BottomRowButtons>  
               </BottomOperationsDiv>
             </ButtonsContainer>
           </CalculatorContainer>
         );
+    }
+
+    if(){
+
     }
 }
 export default Calculator;
