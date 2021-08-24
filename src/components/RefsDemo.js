@@ -63,8 +63,8 @@ class Calculator extends Component {
     this.state = {screenText: "",
     id: "",
     numInputs: 0,
-    firstNum: 0,
-    secondNum: 0,
+    firstNum: "",
+    secondNum: "",
     operator: "",
     operatorClicked: false
 
@@ -91,6 +91,7 @@ class Calculator extends Component {
   }
   multiply(num1, num2){
     var result = num1 * num2;
+    return result;
   }
 
   divide(num1, num2){
@@ -100,17 +101,45 @@ class Calculator extends Component {
     var result = num1 - num2; 
   }
   add(num1, num2){
-    result = num1 + num2;
+    var result = num1 + num2;
   }
   parseStringForSecondNum(str){
     var letter;
     var i = 0;
+    for(i = 0; i < this.state.screenText.length; i++){
+      if(this.state.operator === 'x'){
+        if(str[i] === 'x'){
+          for(i = (i+2); i< this.state.screenText.length; i++){            
+            this.state.secondNum = this.state.secondNum + str[i];
+          }
+          return this.state.secondNum;
+        }
+      }
+      if(this.state.operator === '÷'){
+        if(str[i] === '÷'){
 
+        }
+      }
+      if(this.state.operator === '-'){
+        if(str[i] === '-'){
+
+        }
+      }
+      if(this.state.operator === '+'){
+        if(str[i] === '+'){
+
+        }
+      }
+      
+    }
     
   }
   equalsPressed(){
     if(this.state.operator === 'x'){
-      this.state.secondNum = 
+    this.setState({secondNum: this.parseStringForSecondNum(this.state.screenText)});
+    console.log('FirstNum is: ' + this.state.firstNum);
+    console.log('SecondNum is: ' + this.state.secondNum);
+    console.log(this.multiply(this.state.firstNum, this.state.secondNum));
     }else if(this.state.operator === '÷'){
 
     }else if (this.state.operator === '-'){
@@ -122,7 +151,11 @@ class Calculator extends Component {
 
   clearPressed(){
     this.setState({
-      screenText: ""
+      screenText: "",
+      firstNum: "",
+      secondNum: "",
+      operator: "",
+      operatorClicked: false
     });
   }
 
@@ -155,15 +188,13 @@ class Calculator extends Component {
                 <BottomRowButtons onClick={() => this.handleClick()} id="0" type="button">0</BottomRowButtons>
                 <BottomRowButtons onClick={() => this.handleClick()} id="." type="button">.</BottomRowButtons>
                 <BottomRowButtons onClick={() => this.clearPressed()} id="clear" type="button">clear</BottomRowButtons>
-                <BottomRowButtons onClick={() => this.handleClick()} id="=" type="button">=</BottomRowButtons>  
+                <BottomRowButtons onClick={() => this.equalsPressed('=')} id="=" type="button">=</BottomRowButtons>  
               </BottomOperationsDiv>
             </ButtonsContainer>
           </CalculatorContainer>
         );
     }
 
-    if(){
-
-    }
+    
 }
 export default Calculator;
